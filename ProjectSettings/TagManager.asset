@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - StandardTerrain
+  - OutOfBounds
+  - Enemy
+  - Checkpoint
+  - Wall
+  - Goal
   layers:
   - Default
   - TransparentFX
