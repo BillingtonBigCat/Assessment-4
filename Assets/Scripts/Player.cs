@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     public GameObject RespawnPoint;
 
     public Sprite changeState;
-    bool isChanged = false;
+    //bool isChanged = false;
 
     void Awake()
     {
@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
         Move();
         Jump();
         CheckIfGrounded();
-        ChangeState();
+        //ChangeState();
     }
 
 
@@ -104,6 +104,11 @@ public class Player : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
+
+        if (other.gameObject.tag == "ChangePoint")
+        {
+            this.gameObject.GetComponent<SpriteRenderer>().sprite = changeState;
+        }
     }
 
     // Setting the Respawn Point to the Checkpoint
@@ -116,9 +121,10 @@ public class Player : MonoBehaviour
         }
     }
 
+    /*
     private void ChangeState()
     {
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.S) && !isChanged)
         {
             this.gameObject.GetComponent<SpriteRenderer>().sprite = changeState;
             //isChanged = true;
@@ -128,5 +134,6 @@ public class Player : MonoBehaviour
 
         }
     }
+    */
 
 }
