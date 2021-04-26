@@ -5,6 +5,17 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+<<<<<<< Updated upstream
+=======
+  - StandardTerrain
+  - OutOfBounds
+  - Enemy
+  - Checkpoint
+  - Wall
+  - Goal
+  - ChangePoint
+  - Breakable
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
