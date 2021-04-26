@@ -24,6 +24,9 @@ public class Player : MonoBehaviour
 
     public GameObject RespawnPoint;
 
+    public Sprite changeState;
+    bool isChanged = false;
+
     void Awake()
     {
         gameObject.transform.position = RespawnPoint.transform.position;
@@ -33,6 +36,7 @@ public class Player : MonoBehaviour
     {
         player = GetComponent<Rigidbody2D>();
         additionalJumps = defaultAdditionalJumps;
+        //ChangeState();
     }
 
     void Update()
@@ -40,9 +44,11 @@ public class Player : MonoBehaviour
         Move();
         Jump();
         CheckIfGrounded();
+        ChangeState();
     }
 
 
+    // Control Movement of Player
     void Move()
     {
         float x = Input.GetAxisRaw("Horizontal");
@@ -50,6 +56,7 @@ public class Player : MonoBehaviour
         player.velocity = new Vector2(moveBy, player.velocity.y);
     }
 
+    // Control Player Jumps
     void Jump()
     {
         if (Input.GetKeyDown(KeyCode.Space) && (isGrounded || Time.time - lastTimeGrounded <= rememberGroundedFor || additionalJumps > 0))
@@ -69,7 +76,7 @@ public class Player : MonoBehaviour
 
 
 
-
+    // Check if something is below the player
     void CheckIfGrounded()
     {
         RaycastHit2D hit = Physics2D.Raycast(player.transform.position, Vector2.down, 1f, LayerMask.GetMask("Ground"));
@@ -79,6 +86,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    // Handles Respawning when Enemy is hit or fell off platform
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "Enemy")
@@ -91,13 +99,14 @@ public class Player : MonoBehaviour
             gameObject.transform.position = RespawnPoint.transform.position;
         }
 
+        // Loads next scene when you pass the level 
         if (other.gameObject.tag == "Goal")
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 
-
+    // Setting the Respawn Point to the Checkpoint
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Checkpoint")
@@ -106,4 +115,18 @@ public class Player : MonoBehaviour
             
         }
     }
+
+    private void ChangeState()
+    {
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            this.gameObject.GetComponent<SpriteRenderer>().sprite = changeState;
+            //isChanged = true;
+        }
+        else
+        {
+
+        }
+    }
+
 }
