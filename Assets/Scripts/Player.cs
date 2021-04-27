@@ -27,6 +27,10 @@ public class Player : MonoBehaviour
     public Sprite changeState;
     //bool isChanged = false;
 
+    public Animator DeweyAnimator;
+    private string state;
+
+
     void Awake()
     {
         gameObject.transform.position = RespawnPoint.transform.position;
@@ -44,6 +48,7 @@ public class Player : MonoBehaviour
         Move();
         Jump();
         CheckIfGrounded();
+        Ice();
         //ChangeState();
     }
 
@@ -51,9 +56,30 @@ public class Player : MonoBehaviour
     // Control Movement of Player
     void Move()
     {
-        float x = Input.GetAxisRaw("Horizontal");
-        float moveBy = x * speed;
-        player.velocity = new Vector2(moveBy, player.velocity.y);
+        if (state == "Normal")
+        {
+            float x = Input.GetAxisRaw("Horizontal");
+            float moveBy = x * speed;
+            player.velocity = new Vector2(moveBy, player.velocity.y);
+
+            if (x > 0.0f)
+            {
+                DeweyAnimator.SetBool("Moving", true);
+                DeweyAnimator.SetBool("Idle", false);
+            }
+            else
+            {
+                DeweyAnimator.SetBool("Idle", true);
+                DeweyAnimator.SetBool("Moving", false);
+            }
+        }
+
+
+        if (state == "Ice")
+        {
+            player.velocity = new Vector2(0, -15.0f);
+
+        }
     }
 
     // Control Player Jumps
@@ -71,6 +97,23 @@ public class Player : MonoBehaviour
         else if (player.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
         {
             player.velocity += Vector2.up * Physics2D.gravity * (lowJumpMultiplier - 1) * Time.deltaTime;
+        }
+    }
+
+    void Ice()
+    {
+        if (Input.GetKey(KeyCode.S))
+        {
+            DeweyAnimator.SetBool("Ice", true);
+            DeweyAnimator.SetBool("Idle", false);
+            DeweyAnimator.SetBool("Moving", false);
+            state = "Ice";
+
+        }
+        else
+        {
+            DeweyAnimator.SetBool("Ice", false);
+            state = "Normal";
         }
     }
 
@@ -108,6 +151,11 @@ public class Player : MonoBehaviour
         if (other.gameObject.tag == "ChangePoint")
         {
             this.gameObject.GetComponent<SpriteRenderer>().sprite = changeState;
+        }
+
+        if (other.gameObject.tag == "Breakable" && state == "Ice")
+        {
+            Destroy(other.gameObject);
         }
     }
 

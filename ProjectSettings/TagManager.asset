@@ -12,6 +12,7 @@ TagManager:
   - Wall
   - Goal
   - ChangePoint
+  - Breakable
   layers:
   - Default
   - TransparentFX
