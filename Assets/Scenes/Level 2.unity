@@ -603,6 +603,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6003968768782128454, guid: bce72251930dc524f82092d2335c2576, type: 3}
+      propertyPath: jumpForce
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6003968768782128454, guid: bce72251930dc524f82092d2335c2576, type: 3}
       propertyPath: RespawnPoint
       value: 
       objectReference: {fileID: 1828407419}
@@ -791,6 +795,7 @@ GameObject:
   - component: {fileID: 548724366}
   - component: {fileID: 548724365}
   - component: {fileID: 548724363}
+  - component: {fileID: 548724364}
   m_Layer: 0
   m_Name: Ice Monster 2
   m_TagString: Enemy
@@ -811,6 +816,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySpeed: 0
+--- !u!50 &548724364
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 548724362}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!61 &548724365
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1026,7 +1052,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: c2d4122e0ffa4f440be7063955ac1656, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1318,6 +1344,7 @@ GameObject:
   - component: {fileID: 840923198}
   - component: {fileID: 840923197}
   - component: {fileID: 840923195}
+  - component: {fileID: 840923196}
   m_Layer: 0
   m_Name: Ice Monster 1
   m_TagString: Enemy
@@ -1338,6 +1365,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySpeed: 0
+--- !u!50 &840923196
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 840923194}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!61 &840923197
 BoxCollider2D:
   m_ObjectHideFlags: 0
