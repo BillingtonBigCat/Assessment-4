@@ -30,6 +30,8 @@ public class Player : MonoBehaviour
     public Animator DeweyAnimator;
     private string state;
 
+    Object bulletRef;
+
 
     void Awake()
     {
@@ -40,6 +42,7 @@ public class Player : MonoBehaviour
     {
         player = GetComponent<Rigidbody2D>();
         additionalJumps = defaultAdditionalJumps;
+        bulletRef = Resources.Load("Bullet");
         //ChangeState();
     }
 
@@ -49,6 +52,7 @@ public class Player : MonoBehaviour
         Jump();
         CheckIfGrounded();
         Ice();
+        Shoot();
         //ChangeState();
     }
 
@@ -114,6 +118,21 @@ public class Player : MonoBehaviour
         {
             DeweyAnimator.SetBool("Ice", false);
             state = "Normal";
+        }
+    }
+
+    void Shoot()
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+            DeweyAnimator.SetBool("IsShooting", true);
+            GameObject bullet = (GameObject)Instantiate(bulletRef);
+            bullet.transform.position = new Vector3(transform.position.x + .4f, transform.position.y - .2f, -1);
+
+        }
+        else
+        {
+            DeweyAnimator.SetBool("IsShooting", false);
         }
     }
 
