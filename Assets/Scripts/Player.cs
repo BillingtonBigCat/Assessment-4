@@ -24,11 +24,17 @@ public class Player : MonoBehaviour
 
     public GameObject RespawnPoint;
 
-    public Sprite changeState;
+   
     //bool isChanged = false;
 
     public Animator DeweyAnimator;
-    private string state;
+    private string state = "Normal";
+    private int level;
+
+    private bool Level2;
+    private bool Level3;
+    private bool Level4;
+    private bool Level5;
 
     Object bulletRef;
 
@@ -43,7 +49,7 @@ public class Player : MonoBehaviour
         player = GetComponent<Rigidbody2D>();
         additionalJumps = defaultAdditionalJumps;
         bulletRef = Resources.Load("Bullet");
-        //ChangeState();
+        level = SceneManager.GetActiveScene().buildIndex;
     }
 
     void Update()
@@ -53,8 +59,8 @@ public class Player : MonoBehaviour
         CheckIfGrounded();
         Ice();
         Shoot();
-        //ChangeState();
     }
+
 
 
     // Control Movement of Player
@@ -77,8 +83,6 @@ public class Player : MonoBehaviour
                 DeweyAnimator.SetBool("Moving", false);
             }
         }
-
-
         if (state == "Ice")
         {
             player.velocity = new Vector2(0, -15.0f);
@@ -106,33 +110,39 @@ public class Player : MonoBehaviour
 
     void Ice()
     {
-        if (Input.GetKey(KeyCode.S))
+        if (level > 1)
         {
-            DeweyAnimator.SetBool("Ice", true);
-            DeweyAnimator.SetBool("Idle", false);
-            DeweyAnimator.SetBool("Moving", false);
-            state = "Ice";
+            if (Input.GetKey(KeyCode.S))
+            {
+                DeweyAnimator.SetBool("Ice", true);
+                DeweyAnimator.SetBool("Idle", false);
+                DeweyAnimator.SetBool("Moving", false);
+                state = "Ice";
 
-        }
-        else
-        {
-            DeweyAnimator.SetBool("Ice", false);
-            state = "Normal";
+            }
+            else
+            {
+                DeweyAnimator.SetBool("Ice", false);
+                state = "Normal";
+            }
         }
     }
 
     void Shoot()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (level > 2)
         {
+             if (Input.GetMouseButtonDown(0))
+            {
             DeweyAnimator.SetBool("IsShooting", true);
             GameObject bullet = (GameObject)Instantiate(bulletRef);
             bullet.transform.position = new Vector3(transform.position.x + .4f, transform.position.y - .2f, -1);
 
-        }
-        else
-        {
+            }
+             else
+            {
             DeweyAnimator.SetBool("IsShooting", false);
+            }
         }
     }
 
@@ -167,11 +177,6 @@ public class Player : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
 
-        if (other.gameObject.tag == "ChangePoint")
-        {
-            this.gameObject.GetComponent<SpriteRenderer>().sprite = changeState;
-        }
-
         if (other.gameObject.tag == "Breakable" && state == "Ice")
         {
             Destroy(other.gameObject);
@@ -187,20 +192,4 @@ public class Player : MonoBehaviour
             
         }
     }
-
-    /*
-    private void ChangeState()
-    {
-        if (Input.GetKeyDown(KeyCode.S) && !isChanged)
-        {
-            this.gameObject.GetComponent<SpriteRenderer>().sprite = changeState;
-            //isChanged = true;
-        }
-        else
-        {
-
-        }
-    }
-    */
-
 }
