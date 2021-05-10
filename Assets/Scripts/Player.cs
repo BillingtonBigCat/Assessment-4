@@ -191,5 +191,21 @@ public class Player : MonoBehaviour
             RespawnPoint = other.gameObject;
             
         }
+
+        if (other.CompareTag("EnemyBullet"))
+        {
+            Destroy(other.gameObject);
+            //health--;
+            //sr.material = matWhite;
+            //if (health <= 0)
+            //{
+                gameObject.transform.position = RespawnPoint.transform.position;
+            //}
+            //else
+            //{
+            //    Invoke("ResetMaterial", .1f);
+            //}
+        }
+
     }
 }
