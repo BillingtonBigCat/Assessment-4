@@ -9,13 +9,14 @@ public class EnemyBullet : MonoBehaviour
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        Invoke("DestroySelf", 5f);
+        Invoke("Kill", 3f);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         rb2d.velocity = new Vector2(-4, 0);
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
