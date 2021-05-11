@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
     private bool Level2;
 
     Object bulletRef;
-    private float fireRate = 3f; // Bullets/second
+    private float fireRate = .3f; // Bullets/second
     private float timeToNextShot; // How much longer we have to wait.
 
     void Start()
@@ -90,17 +90,17 @@ public class Enemy : MonoBehaviour
 
     void Shoot()
     {
-        if (level == 2)
+        if (level == 3)
         {
             timeToNextShot -= Time.deltaTime;
-            //if (timeToNextShot <=0)
-            //{
+            if (timeToNextShot <=0)
+            {
                 timeToNextShot = 1 / fireRate;
                 //DeweyAnimator.SetBool("IsShooting", true);
                 GameObject bullet = (GameObject)Instantiate(bulletRef);
                 bullet.transform.position = new Vector3(transform.position.x + .4f, transform.position.y - .2f, -1);
 
-            //}
+            }
             //else
             //{
             //DeweyAnimator.SetBool("IsShooting", false);
