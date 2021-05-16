@@ -59,6 +59,7 @@ public class Player : MonoBehaviour
         CheckIfGrounded();
         Ice();
         Shoot();
+        Mist();
     }
 
 
@@ -146,6 +147,24 @@ public class Player : MonoBehaviour
         }
     }
 
+    void Mist()
+    {
+        if (level > 3)
+        {
+            if (Input.GetKey(KeyCode.E))
+            {
+                DeweyAnimator.SetBool("Mist", true);
+                DeweyAnimator.SetBool("Idle", false);
+                DeweyAnimator.SetBool("Moving", false);
+                state = "Mist";
+            }
+            else
+            {
+                DeweyAnimator.SetBool("Ice", false);
+                state = "Normal";
+            }
+        }
+    }
 
 
     // Check if something is below the player
