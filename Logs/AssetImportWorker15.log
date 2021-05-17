@@ -15,11 +15,11 @@ C:/Users/nanit/OneDrive/Documents/GitHub/Assessment-4
 -logFile
 Logs/AssetImportWorker15.log
 -srvPort
-50300
+52565
 Successfully changed project path to: C:/Users/nanit/OneDrive/Documents/GitHub/Assessment-4
 C:/Users/nanit/OneDrive/Documents/GitHub/Assessment-4
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 13027.83 ms, found 1 plugins.
+Refreshing native plugins compatible for Editor in 857.43 ms, found 1 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2020.2.4f1 (becced5a802b)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.2.4f1/Editor/Data/Resources/UnitySubsystems

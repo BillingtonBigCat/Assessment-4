@@ -9,13 +9,13 @@ C:\Program Files\Unity\Hub\Editor\2020.2.4f1\Editor\Unity.exe
 -batchMode
 -noUpm
 -name
-AssetImportWorker14
+AssetImportWorker1
 -projectPath
 C:/Users/nanit/OneDrive/Documents/GitHub/Assessment-4
 -logFile
-Logs/AssetImportWorker14.log
+Logs/AssetImportWorker1.log
 -srvPort
-52565
+50300
 Successfully changed project path to: C:/Users/nanit/OneDrive/Documents/GitHub/Assessment-4
 C:/Users/nanit/OneDrive/Documents/GitHub/Assessment-4
 Using Asset Import Pipeline V2.
