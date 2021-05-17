@@ -7,6 +7,9 @@ public class Player : MonoBehaviour
 {
     Rigidbody2D player;
 
+    private Collider2D playerCollider;
+    private SpriteRenderer playerSprite;
+
     public float speed;
     public float jumpForce;
 
@@ -46,6 +49,8 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        playerCollider = GetComponent<Collider2D>();
+        playerSprite = GetComponent<SpriteRenderer>();
         player = GetComponent<Rigidbody2D>();
         additionalJumps = defaultAdditionalJumps;
         bulletRef = Resources.Load("Bullet");
@@ -69,7 +74,16 @@ public class Player : MonoBehaviour
     {
         if (state == "Normal")
         {
+            Vector3 playerScale = transform.localScale;
             float x = Input.GetAxisRaw("Horizontal");
+            if (Input.GetKey(KeyCode.D))
+            {
+                playerSprite.flipX = false;
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                playerSprite.flipX = true;
+            }
             float moveBy = x * speed;
             player.velocity = new Vector2(moveBy, player.velocity.y);
 
@@ -84,10 +98,15 @@ public class Player : MonoBehaviour
                 DeweyAnimator.SetBool("Moving", false);
             }
         }
+
         if (state == "Ice")
         {
             player.velocity = new Vector2(0, -15.0f);
+        }
 
+        if (state == "Mist")
+        {
+            player.velocity = new Vector2(0, 0);
         }
     }
 
@@ -113,21 +132,23 @@ public class Player : MonoBehaviour
     {
         if (level > 1)
         {
-            if (Input.GetKey(KeyCode.S))
-            {
-                DeweyAnimator.SetBool("Ice", true);
-                DeweyAnimator.SetBool("Idle", false);
-                DeweyAnimator.SetBool("Moving", false);
-                state = "Ice";
+            if (state != "Mist")
+                if (Input.GetKey(KeyCode.S))
+                {
+                    DeweyAnimator.SetBool("Ice", true);
+                    DeweyAnimator.SetBool("Idle", false);
+                    DeweyAnimator.SetBool("Moving", false);
+                    state = "Ice";
 
-            }
-            else
-            {
-                DeweyAnimator.SetBool("Ice", false);
-                state = "Normal";
+                }
+                else
+                {
+                    DeweyAnimator.SetBool("Ice", false);
+                    state = "Normal";
+                }
             }
         }
-    }
+    
 
     void Shoot()
     {
@@ -151,17 +172,31 @@ public class Player : MonoBehaviour
     {
         if (level > 3)
         {
-            if (Input.GetKey(KeyCode.E))
+            if (state != "Ice")
             {
-                DeweyAnimator.SetBool("Mist", true);
-                DeweyAnimator.SetBool("Idle", false);
-                DeweyAnimator.SetBool("Moving", false);
-                state = "Mist";
-            }
-            else
-            {
-                DeweyAnimator.SetBool("Ice", false);
-                state = "Normal";
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    DeweyAnimator.SetBool("Mist", true);
+                    DeweyAnimator.SetBool("Idle", false);
+                    DeweyAnimator.SetBool("Moving", false);
+                    DeweyAnimator.SetBool("Ice", false);
+                    state = "Mist";
+                    if (playerCollider.enabled == true)
+                    {
+                        playerCollider.enabled = !playerCollider.enabled;
+                    }
+                    player.gravityScale = 0;
+                }
+                else
+                {
+                    DeweyAnimator.SetBool("Mist", false);
+                    state = "Normal";
+                    if (playerCollider.enabled == false)
+                    {
+                        playerCollider.enabled = !playerCollider.enabled;
+                    };
+                    player.gravityScale = 1;
+                }
             }
         }
     }
@@ -180,7 +215,7 @@ public class Player : MonoBehaviour
     // Handles Respawning when Enemy is hit or fell off platform
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "Enemy")
+        if ((other.gameObject.tag == "Enemy" || other.gameObject.tag == "DangerousTerrain") && state != "Mist" )
         {
             gameObject.transform.position = RespawnPoint.transform.position;
         }
@@ -193,7 +228,12 @@ public class Player : MonoBehaviour
         // Loads next scene when you pass the level 
         if (other.gameObject.tag == "Goal")
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            if (level < 5)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            }
+            else
+                SceneManager.LoadScene(0);
         }
 
         if (other.gameObject.tag == "Breakable" && state == "Ice")
@@ -227,4 +267,5 @@ public class Player : MonoBehaviour
         }
 
     }
+    
 }

@@ -11,6 +11,8 @@ public class Enemy : MonoBehaviour
 
     private int health = 3;
 
+    
+
     //Materials
     private Material matWhite;
     private Material matDefault;
@@ -79,11 +81,14 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        Vector3 enemyScale = transform.localScale;
 
-
-        if (other.gameObject.tag == "Wall")
+        if (other.gameObject.tag == "Wall" || other.gameObject.tag == "Enemy")
         {
             enemySpeed *= -1;
+
+            enemyScale.x *= -1;
+            transform.localScale = enemyScale;
         }
 
     }

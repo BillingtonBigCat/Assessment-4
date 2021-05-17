@@ -15,6 +15,7 @@ TagManager:
   - Breakable
   - Bullet
   - EnemyBullet
+  - DangerousTerrain
   layers:
   - Default
   - TransparentFX

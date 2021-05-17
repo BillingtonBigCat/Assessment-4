@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  jumpForce: 5
+  jumpForce: 6
   fallMultiplier: 2.5
   lowJumpMultiplier: 2
   groundLayer:
@@ -130,7 +130,6 @@ MonoBehaviour:
   rememberGroundedFor: 2
   defaultAdditionalJumps: 1
   RespawnPoint: {fileID: 0}
-  changeState: {fileID: 21300000, guid: f663f3268be19284a8c2eea451e3d3f0, type: 3}
   DeweyAnimator: {fileID: 4877423442766742904}
 --- !u!95 &4877423442766742904
 Animator:
