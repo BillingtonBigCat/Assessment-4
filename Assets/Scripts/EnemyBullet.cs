@@ -21,7 +21,15 @@ public class EnemyBullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        //if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.tag == "Ground")
+            Destroy(gameObject);
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
             Destroy(gameObject);
     }
 

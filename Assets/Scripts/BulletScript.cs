@@ -18,10 +18,12 @@ public class BulletScript : MonoBehaviour
         rb2d.velocity = new Vector2(8, 0);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
-            DestroySelf();
+        print("Bullet named: " + name + ", is colliding with other: " + collision.name);
+        if (collision.gameObject.tag == "Ground")
+            Destroy(gameObject);
     }
 
     private void DestroySelf()

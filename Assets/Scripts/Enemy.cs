@@ -89,6 +89,7 @@ public class Enemy : MonoBehaviour
 
             enemyScale.x *= -1;
             transform.localScale = enemyScale;
+            //Destroy(gameObject);
         }
 
     }
