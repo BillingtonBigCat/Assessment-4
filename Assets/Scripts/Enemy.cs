@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour
     private bool Level2;
 
     Object bulletRef;
+    Object bulletRef2;
     private float fireRate = .3f; // Bullets/second
     private float timeToNextShot; // How much longer we have to wait.
 
@@ -35,6 +36,8 @@ public class Enemy : MonoBehaviour
         explosionRef = Resources.Load("Explosion");
         level = SceneManager.GetActiveScene().buildIndex;
         bulletRef = Resources.Load("firebullet");
+        bulletRef2 = Resources.Load("firebullet2");
+
 
     }
 
@@ -105,6 +108,30 @@ public class Enemy : MonoBehaviour
                 //DeweyAnimator.SetBool("IsShooting", true);
                 GameObject bullet = (GameObject)Instantiate(bulletRef);
                 bullet.transform.position = new Vector3(transform.position.x + .4f, transform.position.y - .2f, -1);
+
+            }
+            //else
+            //{
+            //DeweyAnimator.SetBool("IsShooting", false);
+            //}
+
+
+        }
+        if (level == 5)
+        {
+            timeToNextShot -= Time.deltaTime;
+            if (timeToNextShot <= 0)
+            {
+                timeToNextShot = 1 / fireRate;
+                //DeweyAnimator.SetBool("IsShooting", true);
+                GameObject bullet2 = (GameObject)Instantiate(bulletRef2);
+                if (enemy.transform.position.y > 0 && enemy.transform.position.x < 35) {
+                    bullet2.transform.position = new Vector3(transform.position.x + .4f, transform.position.y - .2f, 1);
+                }
+                if (enemy.transform.position.y > 0 && enemy.transform.position.x > 35)
+                {
+                    bullet2.transform.position = new Vector3(transform.position.x + .4f, transform.position.y - .2f, -1);
+                }
 
             }
             //else
