@@ -158,7 +158,7 @@ public class Player : MonoBehaviour
             {
             DeweyAnimator.SetBool("IsShooting", true);
             GameObject bullet = (GameObject)Instantiate(bulletRef);
-            bullet.transform.position = new Vector3(transform.position.x + .4f, transform.position.y - .2f, -1);
+            bullet.transform.position = new Vector3(transform.position.x + .4f, transform.position.y + .1f, -1);
 
             }
              else
